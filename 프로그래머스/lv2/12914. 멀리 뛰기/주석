@@ -1,0 +1,43 @@
+using System;
+using System.Numerics;
+
+public class Solution 
+{
+    public long solution(int n)
+    {
+        //[1] 점화식 >> test 1, 2 런타임에러
+        /*long answer = 0;
+        int[] dp = new int[n];
+        dp[0] = 1;
+        dp[1] = 2;
+        dp[2] = 3;
+        
+        for (int i = 3; i <= n-1; i++)
+        {
+            dp[i] = (dp[i-1]+dp[i-2])%1234567;
+        }
+        
+        answer = dp[n-1];
+        */
+        
+        //[2] 피보나치수열 >>%1234567를 answer구하고 했더니 오버플로우. 
+        //자료형 바꾸고 난리 부르스를 췄는데 걍 더하자마자 나누면 간단. 조건을 준 이유가 있다.
+        long answer = 1;
+        long a = 1, b = 2;
+
+        if (n == 1 || n==2)
+         answer = n;
+        
+        else
+        {
+            for (int i = 3; i <= n; i++)
+            {
+                answer = (a + b) % 1234567;
+                a = b;
+                b = answer;
+            }
+        }
+        
+        return answer;
+    }
+}
