@@ -4,7 +4,7 @@ public class Solution
 {
     public string solution(string s) 
     {        
-        bool isStart = true;
+        bool isUpper = true;
         string[] str = new string[s.Length];
         string answer = "";
         
@@ -12,21 +12,21 @@ public class Solution
         {
             str[i] = s.Substring(i,1);
 
-            if(isStart)
+            if(isUpper)
             {
                 str[i] = str[i].ToUpper();
-                isStart = false;
+                isUpper = false;
             }
             
             else
             {
                 str[i] = str[i].ToLower();
-                isStart = true;
+                isUpper = true;
             }
             
             if(str[i] == " ")
             {
-                isStart = true;
+                isUpper = true;
             }
             
             answer += str[i];
