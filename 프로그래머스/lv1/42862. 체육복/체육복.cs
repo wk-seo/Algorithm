@@ -17,7 +17,6 @@ public class Solution
                 //여벌이 있고 잃어버린 경우에도 answer++해주어야함.
                 answer++;
                 lost[i] = 34; //그리고 자기 것 입으니 빌려줄 사람 검사는 안해야쥐
-                continue;
             }
         }
         
@@ -30,14 +29,12 @@ public class Solution
             {
                 reserve[Array.IndexOf(reserve, lost[i]-1)] = 32;
                 answer++;
-                continue;
             }
             
             else if(reserve.Contains(lost[i]+1))
             {
                 reserve[Array.IndexOf(reserve, lost[i]+1)] = 32;
                 answer++;
-                continue;
             }
             
         }
