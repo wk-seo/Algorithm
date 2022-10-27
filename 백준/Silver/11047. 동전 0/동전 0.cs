@@ -1,20 +1,21 @@
 int[] inputs = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
-int[] moneys = new int[inputs[0]];
-int cnt = 0;
-int j = moneys.Length-1;
-for (int i = 0; i < inputs[0]; i++)
-{
-    moneys[i] = int.Parse(Console.ReadLine());
-}
+int n = inputs[0];
+int k = inputs[1];
+int j = n-1;
+int count = 0;
+int[] coins = new int[n];
 
-while(inputs[1] != 0)
-{
-    if (inputs[1] == 0) break;
-    if (moneys[j] > inputs[1]) j--;
-    else//(moneys[j] <= inputs[1]) 
-    {
-        inputs[1] -= moneys[j];
-        cnt++;
-    }
+for(int i = 0; i < n; i++){
+    coins[i] = int.Parse(Console.ReadLine());
 }
-Console.WriteLine(cnt);
+Array.Sort(coins);
+
+while(k!=0){
+   if(k == 0) break;
+   if(coins[j]>k) j--;
+   else{
+       k-=coins[j];
+       count++;
+   }
+}
+Console.WriteLine(count);
