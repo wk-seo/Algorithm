@@ -1,41 +1,34 @@
-string input = Console.ReadLine();
-string[] inputs = new string[input.Length];
-int answer = 0;
-for (int i = 0; i < input.Length; i++)
-{
-    inputs[i] = input.Substring(i, 1);
-    if (inputs[i] == "A" || inputs[i] == "B" || inputs[i] == "C")
-    {
-        answer+=2;
-    }
-    else if (inputs[i] == "D" || inputs[i] == "E" || inputs[i] == "F")
-    {
-        answer+= 3;
-    }
-    else if (inputs[i] == "G" || inputs[i] == "H" || inputs[i] == "I")
-    {
-        answer+= 4;
-    }
-    else if (inputs[i] == "J" || inputs[i] == "K" || inputs[i] == "L")
-    {
-        answer+= 5;
-    }
-    else if (inputs[i] == "M" || inputs[i] == "N" || inputs[i] == "O")
-    {
-        answer+= 6;
-    }
-    else if (inputs[i] == "P" || inputs[i] == "Q" || inputs[i] == "R"||inputs[i]=="S")
-    {
-        answer+= 7;
-    }
-    else if (inputs[i] == "T" || inputs[i] == "U"||inputs[i] == "V")
-    {
-        answer+= 8;
-    }
-    else
-    {
-        answer+= 9;
+//1 -> 2초 ... 0 -> 11초
+string str = Console.ReadLine();
+string[] arr = new string[str.Length];
+int time = 0;
+for(int i = 0; i < str.Length; i++){
+    switch(str[i]){
+        case 'A': case'B': case'C':
+            time+=3;
+            break;
+        case 'D': case'E': case'F':
+            time+=4;
+            break;
+        case 'G': case'H': case'I':
+            time+=5;
+            break;
+        case 'J': case'K': case'L':
+            time+=6;
+            break;
+        case 'M': case'N': case'O':
+            time+=7;
+            break;
+        case 'P': case'Q': case'R': case'S':
+            time+=8;
+            break;
+        case 'T': case'U': case'V':
+            time+=9;
+            break;
+        case 'W': case'X': case'Y': case'Z':
+            time+=10;
+            break;
     }
 }
-answer += input.Length;
-Console.WriteLine(answer);
+
+Console.WriteLine(time);
