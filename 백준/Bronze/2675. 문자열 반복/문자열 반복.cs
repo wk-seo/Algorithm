@@ -1,21 +1,22 @@
 using System.Text;
 
-int n = int.Parse(Console.ReadLine());
-for (int i = 0; i < n; i++)
-{
-    string[] input = Console.ReadLine().Split();
-    int m = int.Parse(input[0]);
-    string[] arr = new string[input[1].Length];
+//[0]testCase t, StringBuilder sb
+int t = int.Parse(Console.ReadLine());
+StringBuilder sb = new StringBuilder();
 
-    StringBuilder sb = new StringBuilder();
-
-    for (int j = 0; j < input[1].Length; j++)
-    {
-        arr[j] = input[1].Substring(j, 1);
-        for (int k = 0; k < m; k++)
-        {
-            sb.Append(arr[j]);
+//[1]input
+for(int i = 0; i<t; i++){
+    sb.Clear();
+    string[] inputs = Console.ReadLine().Split();
+    int r = int.Parse(inputs[0]);
+    string s = inputs[1];
+    
+    //[2]Process
+    for(int j = 0; j<s.Length; j++){
+        for(int k = 0; k<r; k++){
+            sb.Append(s[j]);
         }
     }
+    //[3]Output
     Console.WriteLine(sb.ToString());
 }
