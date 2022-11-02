@@ -1,14 +1,7 @@
 int n = int.Parse(Console.ReadLine());
-int answer = n;
-if (n == 0) answer = 1;
-else
-{
-    while (n - 1 > 1)
-    {
-        if (n - 1 == 1) break;
-        answer *= (n - 1);
-        n--;
-    }
-}
+Console.WriteLine(Facto(n));
 
-Console.WriteLine(answer);
+int Facto(int n){
+     if (n == 0 || n==1) return 1;
+     return n * Facto(n - 1);
+ }
