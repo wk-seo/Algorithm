@@ -12,9 +12,7 @@ for (int i = 0; i < t; i++)
     int namuji = a % 10;
     if (a == 0) answer = 1;
     else if (namuji == 0 && a > 0)
-    {
         answer = 10;
-    }
     else
     {
         while (true)
@@ -22,26 +20,13 @@ for (int i = 0; i < t; i++)
             numerics.Add(namuji);
             namuji = namuji * a % 10;
             if (numerics.Contains(namuji))
-            {
                 break;
-            }
         }
 
         if (numerics.Count == 1)
-        {
             answer = numerics[0];
-        }
-
-        else if (inputs[1] % numerics.Count == 0)
-        {
-            answer = numerics[numerics.Count - 1];
-
-        }
-
         else
-        {
-            answer = numerics[inputs[1] % numerics.Count - 1];
-        }
+            answer = numerics [inputs[1]%numerics.Count == 0?numerics.Count-1: inputs[1]%numerics.Count-1];
     }
 
     Console.WriteLine(answer);
