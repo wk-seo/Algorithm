@@ -1,0 +1,1 @@
+Console.WriteLine(Convert.ToInt32(Convert.ToChar(Console.ReadLine())));
