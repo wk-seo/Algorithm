@@ -3,43 +3,46 @@ using System.Collections.Generic;
 string s = "";
 while(s!=".")//입력 반복문
 {
-    s = Console.ReadLine(); //입력 받음
-    if (s == ".") break;  //반복문 종료 조건
-    bool check = true; //닫는 괄호 하나만 들어왔을 때 false가 됨
-    Stack<char> stack = new Stack<char>(); //char Stack
-    for (int i = 0; i < s.Length; i++) // 문자 하나씩 검사
+    List<char> list = new List<char>();
+    s = Console.ReadLine();
+    if (s == ".") break;
+    int bigC = 0;
+    int smallC = 0;
+    bool check = true;
+
+    for (int i = 0; i < s.Length; i++)
     {
         switch (s[i])
         {
-            case '(': //여는 괄호가 들어왔을 때
+            case '(':
+                smallC += 1;
+                list.Add(s[i]);
+                break;
             case '[':
-                stack.Push(s[i]); //stack에 push
-                break; //switch문 종료 -> 다음 문자로 넘어감
-            case ')': //닫는 소괄호 들어왔을 때
-                if (stack.Count != 0 && stack.Peek() == '(') //여는괄호가 있고, 걔가 소괄호일 때
+                bigC += 1;
+                list.Add(s[i]);
+                break;
+            case ')':
+                if (smallC != 0 && list[list.Count - 1] == '(')
                 {
-                    stack.Pop(); //뺀다(균형 맞음)
-                    break; //swtich문 종료
+                    smallC -= 1;
+                    list.RemoveAt(list.Count - 1);
                 }
                 else
-                {
                     check = false;
-                    break; //위 조건이 아니면 바로 switch문 종료
-                }
-            case ']': //닫는 대괄호 들어왔을 때
-                if (stack.Count!=0 && stack.Peek()=='[') //여는 괄호가 있고 걔가 대괄호일 때
+                break;
+            case ']':
+                if (bigC != 0 && list[list.Count - 1] == '[')
                 {
-                    stack.Pop(); //뺀다(균형 맞음)
-                    break; //switch문 종료
+                    bigC -= 1;
+                    list.RemoveAt(list.Count - 1);
                 }
                 else
-                {
                     check = false;
-                    break; //위 조건이 아니면 바로 switch문 종료
-                } //위 조건이 아니면 바로 switch문 종료
+                break;
         }
-        if (!check) break; //다음 문자 검사
+        if (!check) break;
     }
-    Console.WriteLine(check&&stack.Count==0 ? "yes" : "no");
-    stack.Clear(); //stack 비워둠
+    Console.WriteLine(check&&smallC==0&&bigC==0 ? "yes" : "no");
+    list.Clear();
 }
