@@ -20,7 +20,7 @@ long Hash(string s){
             }
             r = r*31%m;
         }
-        result = (result+Array.IndexOf(alphabets, s[i]) * r)%m;
-    }
+        result = (result+ Array.IndexOf(alphabets, s[i]) * r) % m;
+   }
     return result;
 }
