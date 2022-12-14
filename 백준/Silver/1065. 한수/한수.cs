@@ -1,55 +1,35 @@
-using System;
-
-class MainApp
+int n = int.Parse(Console.ReadLine());
+int count = 0;
+for (int i = 1; i <= n; i++)
 {
-    public static void Main(string[] args)
+    if (i < 100)
+        count++;
+    else
     {
-        int n = int.Parse(Console.ReadLine());
-        int count = 0;
-
-        for (int i = 1; i <= n; i++)
-        {
-            if (Han(i))
-            {
-                count++;
-            }
-        }
-
-        Console.WriteLine(count);
+        if (isHan(i))
+            count++;
     }
-    
-    static bool Han(int num)
-        {
-        bool isHan = true;
+}
 
-        string snum = num.ToString();
+Console.WriteLine(count);
 
-        string[] sarr = new string[snum.Length];
-        for (int i = 0; i < snum.Length; i++)
-        {
-            sarr[i] = snum.Substring(i, 1);
-        }
-        
-        int[] arr = Array.ConvertAll(sarr, int.Parse);
-        int l = arr.Length;
-
-        if (l <= 2)
-        {
-            isHan = true;
-        }
-        
+bool isHan(int n) //23
+{
+    bool answer = true;
+    string s = n.ToString();
+    int cha = 0;
+    for (int i = 0; i<s.Length-1; i++)
+    {
+        if (i == 0)
+            cha = s[1] - s[0];
         else
         {
-            for (int i = l-1; i >= 2; i--)
+            if (s[i + 1] - s[i] != cha)
             {
-                if (arr[i] - arr[i - 1] != arr[i - 1] - arr[i - 2])
-                {
-                    isHan = false;
-                    return isHan;
-                }
+                answer = false;
+                break;
             }
         }
-
-        return isHan;
     }
+    return answer;
 }
