@@ -1,21 +1,38 @@
-int[] inputs = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
-int n = inputs[0];
-int k = inputs[1];
-int j = n-1;
-int count = 0;
-int[] coins = new int[n];
+// [1] Input
+int[] nk = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+int n = nk[0];
+int k = nk[1];
 
-for(int i = 0; i < n; i++){
-    coins[i] = int.Parse(Console.ReadLine());
-}
-Array.Sort(coins);
+int[] values = new int[n];
 
-while(k!=0){
-   if(k == 0) break;
-   if(coins[j]>k) j--;
-   else{
-       k-=coins[j];
-       count++;
-   }
+// 동전 개수
+int coinCount = 0;
+
+for (int i = 0; i < n; i++)
+{
+    values[i] = int.Parse(Console.ReadLine());
 }
-Console.WriteLine(count);
+
+// [2] Process 
+
+// values 내림차순 정렬
+Array.Sort(values);
+Array.Reverse(values);
+
+int index = 0;
+
+while (k != 0)
+{
+    if (values[index] > k)
+    {
+        index++;
+    }
+    else
+    {
+        k -= values[index];
+        coinCount++;                
+    }
+}
+
+// [3] Output
+Console.WriteLine(coinCount);
