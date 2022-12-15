@@ -1,12 +1,14 @@
 int n = int.Parse(Console.ReadLine());
 
-int F(int n){
-    int result = 0;
-    if(n == 0) return result;
-    else if(n == 1) return result+1;
-    else{
-        return F(n-1)+F(n-2);
-    }
-}
+Console.WriteLine(Fib(n));
 
-Console.WriteLine(F(n).ToString());
+int Fib(int n)
+{
+    if (n == 0)
+        return 0;
+
+    if (n == 1)
+        return 1;
+
+    return Fib(n - 1) + Fib(n - 2);
+}
