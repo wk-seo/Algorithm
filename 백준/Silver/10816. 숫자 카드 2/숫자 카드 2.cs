@@ -1,30 +1,50 @@
 using System.Collections.Generic;
 using System.Text;
 
-StringBuilder counts = new StringBuilder();
-int n = Int32.Parse(Console.ReadLine());
-string[] inputs = Console.ReadLine().Split();
+StringBuilder sb = new StringBuilder();
+
+int n = int.Parse(Console.ReadLine());
+int[] sangCard = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+Dictionary<int, int> sangCards = new Dictionary<int, int>();
+
+for(int i = 0; i < n; i++){
+
+    if(!sangCards.TryAdd(sangCard[i], 1))
+        sangCards[sangCard[i]]++;
+}
 
 int m = int.Parse(Console.ReadLine());
-string[] ms = Console.ReadLine().Split();
+int[] compareCard = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
 
-Dictionary<string, int> cards = new Dictionary<string, int>();
+int[] trimedSangCard = sangCards.Keys.ToArray();
+Array.Sort(trimedSangCard);
 
-for (int i = 0; i < n; i++)
+for (int i = 0; i < m; i++)
 {
-    if(!cards.ContainsKey(inputs[i]))
-        cards.Add(inputs[i], 1);
+    if (BinarySearch(compareCard[i], trimedSangCard, 0, trimedSangCard.Length - 1))
+        sb.Append(sangCards[compareCard[i]] + " ");
     else
-        cards[inputs[i]]++;
+        sb.Append("0 ");
 }
 
-for (int j = 0; j < m; j++)
+Console.WriteLine(sb.ToString().TrimEnd());
+
+bool BinarySearch(int num, int[] list, int start, int end)
 {
-    if (!cards.ContainsKey(ms[j]))
+    bool isThere = false;
+    while (start <= end)
     {
-        counts.Append("0 ");
-    }
-    else counts.Append(cards[ms[j]]+" ");
-}
+        int mid = (start + end) / 2;
+        if (list[mid] == num)
+        {
+            isThere = true;
+            return isThere;
+        }
 
-Console.WriteLine(counts);
+        else if (list[mid] > num)
+            end = mid - 1;
+
+        else start = mid + 1;
+    }
+    return isThere;
+}
