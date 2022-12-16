@@ -3,35 +3,34 @@ using System.Text;
 
 StringBuilder sb = new StringBuilder();
 
-List<int> stack = new List<int>();
-int n = int.Parse(Console.ReadLine());
+// Push, Pop, Count, Peek
+Stack<int> stack = new Stack<int>();
 
-for(int i = 0; i < n; i++){
-    string[] temp = Console.ReadLine().Split();
-    if(temp.Length == 2){
-        stack.Add(int.Parse(temp[1]));
-    }
-    else{
-        switch(temp[0]){
+int n = int.Parse(Console.ReadLine());
+for (int i = 0; i < n; i++)
+{
+    string[] inputs = Console.ReadLine().Split();
+
+    if(inputs.Length>1)
+        stack.Push(int.Parse(inputs[1]));
+    else
+    {
+        switch (inputs[0])
+        {
             case "pop":
-                if(stack.Count==0)
-                    sb.AppendLine("-1");
-                else{
-                    sb.AppendLine(stack[stack.Count-1].ToString());
-                    stack.RemoveAt(stack.Count-1);
-                }
+                sb.AppendLine(stack.Count>0 ? stack.Pop().ToString() : "-1");
                 break;
             case "size":
                 sb.AppendLine(stack.Count.ToString());
                 break;
             case "empty":
-                sb.AppendLine(stack.Count==0?"1":"0");
+                sb.AppendLine(stack.Count == 0 ? "1" : "0");
                 break;
             case "top":
-                sb.AppendLine(stack.Count==0?"-1":stack[stack.Count-1].ToString());
+                sb.AppendLine(stack.Count > 0 ? stack.Peek().ToString() : "-1");
                 break;
-        }
+        }//switch(input[0])
     }
-}
+}//for
 
 Console.WriteLine(sb.ToString());
