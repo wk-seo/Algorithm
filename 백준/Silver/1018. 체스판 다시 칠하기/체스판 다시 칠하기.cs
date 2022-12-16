@@ -1,81 +1,39 @@
-int[] input = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
-int N = input[0];
-int M = input[1];
-string[,] inputs = new string[N,M];
-for (int i = 0; i < N; i++)
+using System.Collections.Generic;
+
+int[] nm = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+int n = nm[0]; // 행 크기
+int m = nm[1]; // 열 크기
+
+List<int> counts = new List<int>();
+
+string[,] board = new string[n, m];
+
+for (int i = 0; i < n; i++)
 {
-    string[] temps = new string[N];
-    temps[i] = Console.ReadLine();
-    for (int j = 0; j < M; j++)
+    string s = Console.ReadLine();
+    for (int j = 0; j < m; j++)
     {
-        inputs[i, j] = temps[i].Substring(j, 1);
+        board[i, j] = s.Substring(j, 1);
     }
 }
 
-List<int> counts = new List<int>();
-for (int i = 0; i <= (N - 8); i++)
+for (int i = 0; i <= n - 8; i++)
 {
-    for (int j = 0; j <= (M - 8); j++)
+    for (int j = 0; j <= m - 8; j++)
     {
-        int cnt1 = 0; //시작이 W일 때 바꾸는 경우의 수
-        int cnt2 = 0; //시작이 B일 때 바꾸는 경우의 수
-
-        for (int q = i; q < i + 8; q++)
+        int count = 0;
+        for (int p = i; p < i + 8; p++)
         {
-            for (int r = j; r < j + 8; r++)
+            for (int q = j; q < j + 8; q++)
             {
-                if (q%2 ==0)//짝수번째가 W로 시작할 경우....
-                {
-                    if (r % 2 == 0)
-                    {
-                        if (inputs[q, r] == "B") cnt1++;
-                    }
-                    else
-                    {
-                        if (inputs[q, r] == "W") cnt1++;
-                    }
-                }
-
-                else
-                {
-                    if (r % 2 == 0)
-                    {
-                        if (inputs[q, r] == "W") cnt1++;
-                    }
-                    else
-                    {
-                        if (inputs[q, r] == "B") cnt1++;
-                    }
-                }
-
-                if (q%2 ==0)//짝수번째가 B로 시작할 경우....
-                {
-                    if (r % 2 == 0)
-                    {
-                        if (inputs[q, r] == "W") cnt2++;
-                    }
-                    else
-                    {
-                        if (inputs[q, r] == "B") cnt2++;
-                    }
-                }
-
-                else
-                {
-                    if (r % 2 == 0)
-                    {
-                        if (inputs[q, r] == "B") cnt2++;
-                    }
-                    else
-                    {
-                        if (inputs[q, r] == "W") cnt2++;
-                    }
-                }
+                if ((p + q) % 2 == 0 && (board[p, q] != board[i, j]))
+                    count++;
+                else if ((p + q) % 2 == 1 && (board[p, q] == board[i, j]))
+                    count++;
             }
         }
-        counts.Add(cnt1);
-        counts.Add(cnt2);
-    }
-
+        counts.Add(count);
+        counts.Add(64-count);
+    }   
 }
 Console.WriteLine(counts.Min());
