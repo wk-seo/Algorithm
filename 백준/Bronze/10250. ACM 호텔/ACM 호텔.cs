@@ -1,16 +1,32 @@
 using System.Text;
 
-StringBuilder rn = new StringBuilder();
+StringBuilder sb = new StringBuilder();
+
 int t = int.Parse(Console.ReadLine());
 for (int i = 0; i < t; i++)
 {
     int[] inputs = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
-    rn.Clear();
-    int a = inputs[2]/inputs[0]+1; //i == 10, 10/6 = 1(열번호)
-    int b = inputs[2] % inputs[0]; //==층수
-    if(b==0) {b = inputs[0]; a-= 1;}
-    rn.Append(b.ToString());
-    if (a < 10) rn.Append("0");
-    rn.Append(a.ToString());
-    Console.WriteLine(rn);
+    int h = inputs[0];
+    int w = inputs[1];
+    int n = inputs[2];
+
+    //h = 6, w = 12, n = 10
+
+    int floor = 0;
+    int ho = 0;
+
+    if (n % h == 0)
+    {
+        floor = h;
+        ho = n / h;
+    }
+    else
+    {
+        floor = n % h;
+        ho = n / h + 1;
+    }
+
+    sb.AppendLine(ho < 10 ? floor + "0" + ho : floor.ToString() + ho);
 }
+
+Console.WriteLine(sb.ToString());

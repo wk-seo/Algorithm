@@ -1,10 +1,10 @@
-# [Bronze II] ACM 호텔 - 10250 
+# [Bronze III] ACM 호텔 - 10250 
 
 [문제 링크](https://www.acmicpc.net/problem/10250) 
 
 ### 성능 요약
 
-메모리: 5612 KB, 시간: 68 ms
+메모리: 5716 KB, 시간: 64 ms
 
 ### 분류
 
