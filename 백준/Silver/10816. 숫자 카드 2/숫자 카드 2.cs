@@ -1,50 +1,53 @@
 using System.Collections.Generic;
 using System.Text;
 
+Dictionary<int, int> dict = new Dictionary<int, int>();
 StringBuilder sb = new StringBuilder();
 
 int n = int.Parse(Console.ReadLine());
-int[] sangCard = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
-Dictionary<int, int> sangCards = new Dictionary<int, int>();
-
-for(int i = 0; i < n; i++){
-
-    if(!sangCards.TryAdd(sangCard[i], 1))
-        sangCards[sangCard[i]]++;
+int[] sc = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+for (int i = 0; i < sc.Length; i++)
+{
+    if (!dict.TryAdd(sc[i], 1))
+        dict[sc[i]]++;
 }
 
 int m = int.Parse(Console.ReadLine());
-int[] compareCard = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+int[] compare = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
 
-int[] trimedSangCard = sangCards.Keys.ToArray();
-Array.Sort(trimedSangCard);
+Array.Sort(sc);
 
-for (int i = 0; i < m; i++)
+for (int i = 0; i < compare.Length; i++)
 {
-    if (BinarySearch(compareCard[i], trimedSangCard, 0, trimedSangCard.Length - 1))
-        sb.Append(sangCards[compareCard[i]] + " ");
-    else
-        sb.Append("0 ");
+    sb.Append((BinarySearch(0, sc.Length - 1, compare[i]) ? dict[compare[i]].ToString() : "0")+" ");
 }
 
 Console.WriteLine(sb.ToString().TrimEnd());
 
-bool BinarySearch(int num, int[] list, int start, int end)
+bool BinarySearch(int start, int end, int num)
 {
-    bool isThere = false;
+    bool check = false;
+
     while (start <= end)
     {
         int mid = (start + end) / 2;
-        if (list[mid] == num)
+
+        if (sc[mid] == num)
         {
-            isThere = true;
-            return isThere;
+            check = true;
+            return check;
         }
 
-        else if (list[mid] > num)
-            end = mid - 1;
+        if (sc[mid] < num)
+        {
+            start = mid + 1;
+        }
 
-        else start = mid + 1;
+        else // sc[mid] > num
+        {
+            end = mid - 1;
+        }
     }
-    return isThere;
+
+    return check;
 }
