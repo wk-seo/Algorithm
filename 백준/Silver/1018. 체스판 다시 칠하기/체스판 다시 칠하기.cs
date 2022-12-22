@@ -1,21 +1,26 @@
 using System.Collections.Generic;
 
-int[] nm = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
-int n = nm[0]; // 행 크기
-int m = nm[1]; // 열 크기
 
-List<int> counts = new List<int>();
+// [1] Input
+ 
+int[] inputs = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+int n = inputs[0];
+int m = inputs[1];
 
-string[,] board = new string[n, m];
+char[,] boards = new char[n, m];
 
 for (int i = 0; i < n; i++)
 {
     string s = Console.ReadLine();
     for (int j = 0; j < m; j++)
     {
-        board[i, j] = s.Substring(j, 1);
+        boards[i, j] = s[j];
     }
 }
+
+// [2] Process
+
+List<int> counts = new List<int>();
 
 for (int i = 0; i <= n - 8; i++)
 {
@@ -26,14 +31,16 @@ for (int i = 0; i <= n - 8; i++)
         {
             for (int q = j; q < j + 8; q++)
             {
-                if ((p + q) % 2 == 0 && (board[p, q] != board[i, j]))
+                if ((p + q) % 2 == 0 && boards[i, j] != boards[p, q])
                     count++;
-                else if ((p + q) % 2 == 1 && (board[p, q] == board[i, j]))
+                else if ((p + q) % 2 != 0 && boards[i, j] == boards[p, q])
                     count++;
             }
         }
         counts.Add(count);
-        counts.Add(64-count);
-    }   
+        counts.Add(64 - count);
+    }
 }
+
+// [3] Output
 Console.WriteLine(counts.Min());
